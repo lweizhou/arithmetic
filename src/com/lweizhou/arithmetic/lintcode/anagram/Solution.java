@@ -13,30 +13,17 @@ public class Solution {
      * @return true or false
      */
     public static boolean anagram(String s, String t) {
-        // write your code here
+
         if(s.length() != t.length())
             return false;
         
         int[] a = new int[256];
+        for(int i = 0,length = s.length(); i < length; i++)
+            a[s.charAt(i)]++;
         
-        for (int i = 0; i < 256; i++) {
-            a[i] = 0;
-        }
-        
-        char[] ss = s.toCharArray();
-        for(int i = 0,length = ss.length; i < length; i++)
-            ++a[ss[i]];
-        
-        
-        char[] ts = t.toCharArray();
-        for(int i = 0,length = ts.length; i < length; i++){
-            if(a[ts[i]] == 0)
-                return false;
-            --a[ts[i]];
-        }
-        
-        for (int c : a) {
-            if( c != 0)
+        for(int i = 0,length = t.length(); i < length; i++){
+            a[t.charAt(i)]--;
+            if(a[t.charAt(i)] < 0)
                 return false;
         }
         
@@ -45,7 +32,7 @@ public class Solution {
     
     public static void main(String[] args) {
         
-        System.out.println(anagram("happy new year", "n ahwryeypp ea"));
+        System.out.println(anagram("happy new year", "n ahwryeypp eb"));
     }
     
 }
