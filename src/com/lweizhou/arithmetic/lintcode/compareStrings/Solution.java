@@ -20,28 +20,22 @@ public class Solution {
         if(A.length() > 0 && B.length() == 0)
             return true;
       
-        int[] cs = new int[256];
-        char[] as = A.toCharArray();
-        for (char c : as) {
-            ++cs[c];
+        int[] counts = new int[26];
+        for (int i = 0; i < A.length(); i++) {
+            counts[A.charAt(i) - 'A'] ++;
         }
-        
-        int[] ds = new int[256];
-        char[] bs = B.toCharArray();
-        for (char c : bs) {
-            ++ds[c];
-        }
-        
-        for(char i : bs){
-            if(ds[i] > cs[i])
+        for (int i = 0; i < B.length(); i++) {
+            counts[B.charAt(i) - 'A'] --;
+            if (counts[B.charAt(i) - 'A'] < 0) {
                 return false;
+            }
         }
         
         return true;
     }
     
     public static void main(String[] args) {
-        System.out.println(compareStrings("AB","ABC"));
+        System.out.println(compareStrings("ABCD","ABC"));
     }
     
 }
