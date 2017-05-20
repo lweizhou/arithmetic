@@ -24,13 +24,19 @@ public class Solution {
         }
         
         char[] ss = s.toCharArray();
-        for(int i = 0,length = ss.length; i < length; i++){
-            a[(int)ss[i]] = 1;
-        }
+        for(int i = 0,length = ss.length; i < length; i++)
+            ++a[ss[i]];
+        
         
         char[] ts = t.toCharArray();
         for(int i = 0,length = ts.length; i < length; i++){
-            if(a[(int)ts[i]] != 1)
+            if(a[ts[i]] == 0)
+                return false;
+            --a[ts[i]];
+        }
+        
+        for (int c : a) {
+            if( c != 0)
                 return false;
         }
         
@@ -39,7 +45,7 @@ public class Solution {
     
     public static void main(String[] args) {
         
-        System.out.println(anagram("abc", "baa"));
+        System.out.println(anagram("happy new year", "n ahwryeypp ea"));
     }
     
 }
